@@ -1,0 +1,138 @@
+<?php
+
+var items = ['milk', 'eggs', 'bread', 'soda'];
+
+<ul>
+  <li>milk</li>
+  <li>eggs</li>
+  <li>bread</li>
+  <li>soda</li>
+</ul>
+
+?>
+
+<?php echo $_FILES['items']; ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<title>"TODO list"</title>
+
+</head>
+
+<body>
+
+<?php
+	var_dump($_GET);
+	echo"<br>";
+	var_dump($_POST);
+?>
+
+<h1>User Login:</h1>
+
+<form method="POST" action="/form.php">
+	<p>
+		<label for="name">Username</label>
+		<input id="name" name="username" type="text" placeholder="username" required>
+	</p>
+	<p>
+		<label for="pass">Password</label>
+		<input id="pass" name="password" type="password" placeholder="password">
+	</p>
+	<p>
+		<button type="submit">Log In</button>
+	</p>
+
+<h1>Email us:</h1>	
+
+
+<form method="POST" action="/form.php">
+	<p>
+		<label for="email_to">To</label>
+		<input id="email_to" name="email" type="email" placeholder="to" required>
+	</p>
+	<p>
+		<label for"email_from">From</label>
+		<input id="email_from" name="email-from" type="email" placeholder="from" required>
+	</p>
+	<p>
+		<label for="email_subject">Subject</label>
+		<input id="email_subject" name="email_subject" type="text" placeholder="subject">
+	<p>
+<!-- 		<input id="email" name="email" type="text" placeholder="email">
+ --></p>
+	<!-- <p>
+		<label for="pass">Password</label>
+		<input id="pass" name="password" type="password" placeholder="Password">
+	</p> -->
+	<p>
+		<!-- <label for="body">Text Body</label> -->
+		<textarea name="email_body" rows="5" cols="80" id="body"></textarea>
+	</p>
+	<p>
+<!-- 	Would you like to save a copy of your email?
+ -->	<label>Would you like to save a copy? <input type="checkbox" name="option[]" checked></label>
+	</p>
+	<p>
+<!-- 		<input type="submit" name="submit">
+ -->		<button type="submit">send</button>
+	</p>
+
+<h1>Multiple choice test</h1>
+	<p>
+<label for="Q1">Q1?</label><br><br>
+<label>Yes <input name="signup" type="radio" value="yes"></label>
+<label>No <input name="signup" type="radio" value="no"</label>
+	</p>
+	<p>
+<label for="Q2">Q2?</label><br><br>
+<label>Yes <input name="signup" type="radio" value="yes"></label>
+<label>No <input name="signup" type="radio" value="no"></label>
+	</p>
+	<p>
+		What are your favorite cookie(s)?<br><br>
+
+<label>giant<input type="checkbox" id="o1" name="cookie[]" value="giant"></label>
+<br>
+<label>tiny<input type="checkbox" id="o2" name="cookie[]" value="tiny"></label>
+<br>
+<label>chunky<input type="checkbox" id="o3" name="cookie[]" value="chunky"></label>
+<br>
+	</p>
+	
+	<p>
+		<label for="option">What have you used in Codeup?</label>
+		<br>
+		<select id="option" name="option[]" multiple>
+		    <option value="php">php</option>
+		    <option value="html">html</option>
+		    <option value="java">java</option>
+</select>
+	</p>
+
+
+	<p>
+		<button type="submit">submit</button>
+	</p>
+</form>
+
+<form>
+
+	<h1>Select Testing</h1>
+
+Are you a web dev?
+<br><br>
+		<label for="webdev">Select: </label>
+		<select id="webdev" name="webdev">
+			<option selected value="1">Yes</option>
+			<option value="0">No</option>
+		</select>
+
+				<button type="submit">submit</button>
+
+
+</form>
+</body>
+</html>
