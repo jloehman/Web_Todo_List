@@ -93,7 +93,8 @@ if(isset($saved_filename)){
     <ul>
    
     <?foreach ($newitems as $index => $items) : ?>
-   <li><? $items . "<a href='?removeitem=$index'>Mark Complete</a>"?></li>
+   <li><?= htmlspecialchars(strip_tags($items)); ?>
+    <a href='?removeitem=$index'>Mark Complete</a></li>
     <? endforeach; ?>
     </ul>
 
