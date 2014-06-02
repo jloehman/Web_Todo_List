@@ -51,7 +51,7 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0) {
 
     if ($_FILES['file1']['type'] == 'text/plain') {
         // Set the destination directory for uploads
-        $upload_dir = '/vagrant/sites/todo.dev/public/uploads.php/';
+        $upload_dir = '/vagrant/sites/todo.dev/public/uploads/';
         // Grab the filename from the uploaded file by using basename
         $uploadedFilename = basename($_FILES['file1']['name']);
         // Create the saved filename using the file's original name and our upload directory
@@ -93,7 +93,7 @@ if(isset($saved_filename)){
     <ul>
    
     <?foreach ($newitems as $index => $items) : ?>
-    <?= "<li> $items <a href='?removeitem=$index'>Mark Complete</a></li>";?>
+   <li><? $items . "<a href='?removeitem=$index'>Mark Complete</a>"?></li>
     <? endforeach; ?>
     </ul>
 
