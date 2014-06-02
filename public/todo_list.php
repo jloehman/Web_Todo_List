@@ -1,8 +1,13 @@
 <?php
 
-$filename = 'list.txt';
+//var_dump($_GET)
+//var_dump($_FILES)
+//var_dump($_POST)
+
+$filename = 'data/list.txt';
 $newitems = getfile($filename);
 $errorMessage = '';
+$items = [];
 
 function savefile($savefilepath, $array) {
     $filename = $savefilepath;
@@ -63,7 +68,12 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0) {
     } else {
         $errorMessage = "Not a valid file. Please use only a plain text file";
     }
+
 }
+if(isset($saved_filename)){
+    echo "<p>You can download your file <a href='/uploads/{$filename}'>here</a>.</p>";
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -75,21 +85,19 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0) {
 <body>
     <h1>Todo List</h1>
     
-    <?php
-    if (!empty($errorMessage)) {
-        echo "<p>{$errorMessage}</p>";
-    }
-    ?>
+    <?if(!empty($errorMessage)) : ?>
+    <li><?= $errorMessage;?></li>
+    <? endif; ?>
+
 
     <ul>
-    <?php
-    foreach ($newitems as $index => $items) {
-        echo "<li>$items <a href='?removeitem=$index'>Mark Complete</a></li>";
-    }
-    ?>
+   
+    <?foreach ($newitems as $index => $items) : ?>
+    <?= "<li> $items <a href='?removeitem=$index'>Mark Complete</a></li>";?>
+    <? endforeach; ?>
     </ul>
 
-    <h1>Please add an item to do the todo list!</h1>
+    <h1>Please add more to todo list!</h1>
     <form method="POST" action="/todo_list.php">
         <p>
             <label for="todoitem">Add Todo Item</label>
