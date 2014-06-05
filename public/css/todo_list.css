@@ -1,0 +1,19 @@
+.fancy-header {
+    color: #FFF000;
+    text-decoration: underline;
+}
+
+body
+{
+	background-image: url(http://sean.is/tutorials/pattern/texture.jpg);
+	background-repeat: repeat x;
+
+}
+
+#child{
+	color: #00f;
+}
+
+div {
+	background-color: #0f0;
+}
