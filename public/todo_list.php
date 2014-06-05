@@ -79,11 +79,14 @@ if(isset($saved_filename)){
 <!DOCTYPE html>
 <html>
 
-<head>
+<head class="fancy-header">
+     <meta http-equiv="content-type" content="text/csv; charset=UTF-8"/>
     <title>Todo PHP</title>
+    <link rel="stylesheet" href ="css/todo_list.css">
 </head>
 <body>
-    <h1>Todo List</h1>
+<!--    <div>
+ -->    <h1 class="fancy-header" id="child">Todo List</h1>
     
     <?if(!empty($errorMessage)) : ?>
     <li><?= $errorMessage;?></li>
@@ -98,7 +101,7 @@ if(isset($saved_filename)){
     <? endforeach; ?>
     </ul>
 
-    <h1>Please add more to todo list!</h1>
+    <h1 class="fancy-header">Please add more todo list!</h1>
     <form method="POST" action="/todo_list.php">
         <p>
             <label for="todoitem">Add Todo Item</label>
@@ -108,7 +111,7 @@ if(isset($saved_filename)){
         </p>
     </form>
 
-    <h1>Upload File</h1>
+    <h1 class="fancy-header">Upload File</h1>
     <form method="POST" enctype="multipart/form-data">
         <p>
             <label for="file1">File to upload: </label>
@@ -118,6 +121,6 @@ if(isset($saved_filename)){
             <input type="submit" value="Upload">
         </p>
     </form>
-
-</body>
+<!-- </div>
+ --></body>
 </html>
