@@ -9,7 +9,7 @@ require_once ('classes/filestore.php');
 //var_dump($_POST)
 
 $stuff = new Filestore('data/todo.txt');
-$items = $stuff->read_lines('data/todo.txt');
+$items = $stuff->read('data/todo.txt');
 $errorMessage = '';
 
 
@@ -18,13 +18,13 @@ $errorMessage = '';
 if (isset($_GET['key'])) {
     $removeindex = $_GET['key'];
     unset($items[$_GET['key']]);
-    $stuff->write_lines($items);
+    $stuff->write($items);
 }
 
 // do we need to add a new item?
 if (!empty($_POST['todoitem'])) {
     array_push($items, $_POST['todoitem']);
-    $stuff->write_lines($items);
+    $stuff->write($items);
 }
 
 // Verify there were uploaded files and no errors
@@ -41,10 +41,10 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0) {
         move_uploaded_file($_FILES['file1']['tmp_name'], $saved_filename);
 
         $textfile = $saved_filename;
-        $newfile = read_lines($textfile);
+        $newfile = read($textfile);
         $items = array_merge($newfile, $items);
 
-        $stuff->write_lines($items);
+        $stuff->write($items);
 
     } else {
         //$errorMessage = "Not a valid file. Please use only a plain text file";
