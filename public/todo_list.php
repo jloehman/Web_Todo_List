@@ -1,49 +1,30 @@
 <?php
 
+   //<?= htmlspecialchars(strip_tags($item));
+
+require_once ('classes/filestore.php');
+
 //var_dump($_GET)
 //var_dump($_FILES)
 //var_dump($_POST)
 
-$filename = 'data/list.txt';
-$newitems = getfile($filename);
+$stuff = new Filestore('data/todo.txt');
+$items = $stuff->read_lines('data/todo.txt');
 $errorMessage = '';
-$items = [];
 
-function savefile($savefilepath, $array) {
-    $filename = $savefilepath;
-    if (is_writable($filename)) {
-        $handle = fopen($filename, 'w');
-        foreach($array as $items) {
-            fwrite($handle, PHP_EOL . $items);
-        }
-        fclose($handle); 
-    }   
-}
 
-function getfile($filename) {
-    $contents = [];
-    if (is_readable($filename) && filesize($filename) > 0){
-        $handle = fopen($filename, 'r');
-        $bytes = filesize($filename);
-        $contents = trim(fread($handle, $bytes));
-        fclose($handle);
-        $contents = explode("\n", $contents);
-
-    }
-    return $contents;
-} 
 
 // check if we need to remove an item from the list
-if (isset($_GET['removeitem'])) {
-    $removeindex = $_GET['removeitem'];
-    unset($newitems[$removeindex]);
-    savefile($filename, $newitems);
+if (isset($_GET['key'])) {
+    $removeindex = $_GET['key'];
+    unset($items[$_GET['key']]);
+    $stuff->write_lines($items);
 }
 
 // do we need to add a new item?
 if (!empty($_POST['todoitem'])) {
-    array_push($newitems, $_POST['todoitem']);
-    savefile($filename, $newitems);
+    array_push($items, $_POST['todoitem']);
+    $stuff->write_lines($items);
 }
 
 // Verify there were uploaded files and no errors
@@ -60,13 +41,13 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0) {
         move_uploaded_file($_FILES['file1']['tmp_name'], $saved_filename);
 
         $textfile = $saved_filename;
-        $newfile = getfile($textfile);
-        $newitems = array_merge($newfile, $newitems);
+        $newfile = read_lines($textfile);
+        $items = array_merge($newfile, $items);
 
-        savefile($filename, $newitems);
+        $stuff->write_lines($items);
 
     } else {
-        $errorMessage = "Not a valid file. Please use only a plain text file";
+        //$errorMessage = "Not a valid file. Please use only a plain text file";
     }
 
 }
@@ -86,7 +67,7 @@ if(isset($saved_filename)){
 </head>
 <body>
 <!--    <div>
- -->    <h1 class="fancy-header" id="child">Todo List</h1>
+ -->    <h1 class="fancy-header" id="child"><center>TODO</center></h1>
     
     <?if(!empty($errorMessage)) : ?>
     <li><?= $errorMessage;?></li>
@@ -95,9 +76,8 @@ if(isset($saved_filename)){
 
     <ul>
    
-    <?foreach ($newitems as $index => $items) : ?>
-   <li><?= htmlspecialchars(strip_tags($items)); ?>
-    <a href='?removeitem=$index'>Mark Complete</a></li>
+    <?foreach ($items as $key => $item) : ?>
+    <li><?= $item ?><a href="?key=<?= $key; ?>">Mark Complete</a></li>
     <? endforeach; ?>
     </ul>
 
